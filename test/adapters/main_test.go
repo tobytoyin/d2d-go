@@ -12,8 +12,8 @@ func GetMockSource() contracts.Source {
 	return *source
 }
 
-func GetMockTaskCatalog() adapters.MockTasks {
-	return *new(adapters.MockTasks)
+func GetMockTaskCatalog() contracts.SourceTask {
+	return new(adapters.MockTasks)
 }
 
 func TestMockSourceIO(t *testing.T) {
@@ -48,5 +48,20 @@ func TestSummary(t *testing.T) {
 
 	if summary.Content != "mock summary" {
 		t.Fatalf("Summary is not loading contents correctly")
+	}
+}
+
+func TestMetadata(t *testing.T) {
+	source := GetMockSource()
+	tasks := GetMockTaskCatalog()
+
+	metadata := tasks.Metadata(&source)
+
+	if metadata.Type != "mock" {
+		t.Fatalf("Metadata.Type is not loading correctly")
+	}
+
+	if metadata.Properties == nil {
+		t.Fatalf("Metadata.Properties is not load correctly")
 	}
 }

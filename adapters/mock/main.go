@@ -42,7 +42,15 @@ func (task *MockTasks) Summary(source *contracts.Source) contracts.DocSummary {
 	return contracts.DocSummary{Content: "mock summary"}
 }
 
-// func (task *MockTasks) Metadata(source *contracts.Source) contracts.DocMetadata {
-// 	// reuse sourceIO
-// 	contents := string(task.SourceIO(source))
-// }
+func (task *MockTasks) Metadata(source *contracts.Source) contracts.DocMetadata {
+	// reuse sourceIO
+	contents := string(task.SourceIO(source))
+	fmt.Println(contents)
+
+	return contracts.DocMetadata{
+		Type: "mock",
+		Properties: map[string]any{
+			"field1": "key1",
+		},
+	}
+}
