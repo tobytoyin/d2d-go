@@ -1,8 +1,6 @@
 package contracts
 
-type DocumentComponent interface {
-	DocUid() string
-}
+type DocumentComponent interface{}
 
 type DocContent struct {
 	DocumentComponent
@@ -13,7 +11,11 @@ type DocContent struct {
 
 type DocUID string
 
-type DocSummary string
+type DocSummary struct {
+	DocumentComponent
+
+	Content string
+}
 
 // type DocUID struct {
 // 	string

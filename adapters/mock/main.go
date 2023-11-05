@@ -8,7 +8,7 @@ import (
 )
 
 // type alias for private functions handle SourceIO
-type SourceIOFunc func(string) interface{}
+type SourceIOFunc func(string) contracts.DocumentComponent
 
 type MockTasks struct{}
 
@@ -38,20 +38,20 @@ func (task *MockTasks) Uid(source *contracts.Source) string {
 }
 
 // wrapper function to allow other functions to source SourceIO returned string
-func (task *MockTasks) withSourceIO(source *contracts.Source, fn SourceIOFunc) interface{} {
+func (task *MockTasks) withSourceIO(source *contracts.Source, fn SourceIOFunc) contracts.DocumentComponent{} {
 	contents := string(task.SourceIO(source))
 
 	return fn(contents)
 }
 
 // private function to extract the summary from string
-// func summary(content string) interface{} {
-// 	return contracts.DocSummary(content)
-// }
+func summary(content string) Summary {
+	return contracts.DocSummary{Content: "mock summmary"}
+}
 
-// func (task *MockTasks) Summary(source *contracts.Source) interface{} {
-// 	return task.withSourceIO(*source, summary)
-// }
+func (task *MockTasks) Summary(source *contracts.Source) interface{} {
+	return task.withSourceIO(*source, summary)
+}
 
 // 	return contracts.DocSummary(contents)
 // }

@@ -40,13 +40,13 @@ func TestUid(t *testing.T) {
 
 }
 
-// func TestSummary(t *testing.T) {
-// 	source := GetMockSource()
-// 	task := GetMockTaskCatalog()
+func TestSummary(t *testing.T) {
+	source := GetMockSource()
+	task := GetMockTaskCatalog()
 
-// 	summary := task.Summary(&source)
+	summary := task.Summary(&source)
 
-// 	if summary != "mock summary" {
-// 		t.Fatalf("Summary is not loading contents correctly")
-// 	}
-// }
+	if summary != "mock summary" {
+		t.Fatalf("Summary is not loading contents correctly")
+	}
+}
