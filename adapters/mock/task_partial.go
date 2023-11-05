@@ -6,11 +6,11 @@ import (
 	"os"
 )
 
-type MockTasks struct {
+type MockTasksPartial struct {
 }
 
 // required methods for the SourceTask interface
-func (task *MockTasks) SourceIO(source *contracts.Source) []byte {
+func (task *MockTasksPartial) SourceIO(source *contracts.Source) []byte {
 	// open the file
 	content, err := os.ReadFile(source.Path)
 
