@@ -4,6 +4,7 @@ import (
 	"d2d/contracts"
 	"fmt"
 	"os"
+	"strings"
 )
 
 // type alias for private functions handle SourceIO
@@ -26,6 +27,16 @@ func (task *MockTasks) SourceIO(source *contracts.Source) []byte {
 
 }
 
+// method that return the Uid based on the source
+func (task *MockTasks) Uid(source *contracts.Source) string {
+	path := source.Path
+	filename := strings.Split(path, "/")
+	uid := strings.Split(filename[len(filename)-1], ".")[0]
+
+	return uid
+
+}
+
 // wrapper function to allow other functions to source SourceIO returned string
 func (task *MockTasks) withSourceIO(source *contracts.Source, fn SourceIOFunc) interface{} {
 	contents := string(task.SourceIO(source))
@@ -34,13 +45,13 @@ func (task *MockTasks) withSourceIO(source *contracts.Source, fn SourceIOFunc) i
 }
 
 // private function to extract the summary from string
-func summary(content string) interface{} {
-	return contracts.DocSummary(content)
-}
+// func summary(content string) interface{} {
+// 	return contracts.DocSummary(content)
+// }
 
-func (task *MockTasks) Summary(source *contracts.Source) interface{} {
-	return task.withSourceIO(*source, summary)
-}
+// func (task *MockTasks) Summary(source *contracts.Source) interface{} {
+// 	return task.withSourceIO(*source, summary)
+// }
 
 // 	return contracts.DocSummary(contents)
 // }

@@ -5,6 +5,7 @@ package contracts
 type SourceTask interface {
 	// this allow string reading from Source
 	SourceIO(source Source) []byte
+	UiD(soure Source) string
 
 	Contents(source Source) DocContent
 	Metadata(source Source) DocMetadata
