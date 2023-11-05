@@ -46,7 +46,7 @@ func TestSummary(t *testing.T) {
 
 	summary := task.Summary(&source)
 
-	if summary != "mock summary" {
+	if summary.Content != "mock summary" {
 		t.Fatalf("Summary is not loading contents correctly")
 	}
 }

@@ -7,9 +7,7 @@ import (
 	"strings"
 )
 
-// type alias for private functions handle SourceIO
-type SourceIOFunc func(string) contracts.DocumentComponent
-
+// mock implementation of the Service Catalog
 type MockTasks struct{}
 
 // required methods for the SourceTask interface
@@ -37,24 +35,12 @@ func (task *MockTasks) Uid(source *contracts.Source) string {
 
 }
 
-// wrapper function to allow other functions to source SourceIO returned string
-func (task *MockTasks) withSourceIO(source *contracts.Source, fn SourceIOFunc) contracts.DocumentComponent{} {
+// method that return the Summary of the SourceIO's contents
+func (task *MockTasks) Summary(source *contracts.Source) contracts.DocSummary {
 	contents := string(task.SourceIO(source))
-
-	return fn(contents)
+	fmt.Println(contents)
+	return contracts.DocSummary{Content: "mock summary"}
 }
-
-// private function to extract the summary from string
-func summary(content string) Summary {
-	return contracts.DocSummary{Content: "mock summmary"}
-}
-
-func (task *MockTasks) Summary(source *contracts.Source) interface{} {
-	return task.withSourceIO(*source, summary)
-}
-
-// 	return contracts.DocSummary(contents)
-// }
 
 // func (task *MockTasks) Metadata(source *contracts.Source) contracts.DocMetadata {
 // 	// reuse sourceIO
