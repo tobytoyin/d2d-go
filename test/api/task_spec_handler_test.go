@@ -15,8 +15,7 @@ func TestJsonToStructSingleNoOptions(t *testing.T) {
 		}
 	}
 	`
-	jsonHandler := new(api.JSONSpecHandler)
-	res := jsonHandler.JsonStringToTaskSpec(samplePayload)
+	res := api.JsonStringToTaskSpec(samplePayload)
 
 	if res.Spec == nil {
 		t.Fatalf("spec is incorrect")
@@ -45,8 +44,7 @@ func TestJsonToStructSingleWithOptions(t *testing.T) {
 	}
 	`
 
-	jsonHandler := new(api.JSONSpecHandler)
-	res := jsonHandler.JsonStringToTaskSpec(samplePayload)
+	res := api.JsonStringToTaskSpec(samplePayload)
 
 	// access and test the "options" key
 	if res.Spec["summary"].Options["arg1"] != "value1" {
@@ -72,8 +70,7 @@ func TestJsonToStructMixture(t *testing.T) {
 		}
 	}
 	`
-	jsonHandler := new(api.JSONSpecHandler)
-	res := jsonHandler.JsonStringToTaskSpec(samplePayload)
+	res := api.JsonStringToTaskSpec(samplePayload)
 
 	if res.Spec["summary"].Adapter != "mock" {
 		t.Fatalf("summary key isn't loading correctly")
@@ -100,8 +97,7 @@ func TestJsonToStructMixture(t *testing.T) {
 func TestJsonFileToTaskSpec(t *testing.T) {
 	path := "../../examples/task_spec.json"
 
-	jsonHandler := new(api.JSONSpecHandler)
-	res := jsonHandler.JsonFileToTaskSpec(path)
+	res := api.JsonFileToTaskSpec(path)
 
 	// same tests as TestJsonToStructMixture
 	if res.Spec["summary"].Adapter != "mock" {

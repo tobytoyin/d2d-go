@@ -6,10 +6,8 @@ import (
 	"os"
 )
 
-type JSONSpecHandler struct{}
-
 // takes in the string content of JSON and parse into TaskSpec
-func (h JSONSpecHandler) JsonStringToTaskSpec(content string) TaskSpec {
+func JsonStringToTaskSpec(content string) TaskSpec {
 	spec := new(TaskSpec)
 	err := json.Unmarshal([]byte(content), spec)
 	if err != nil {
@@ -19,13 +17,13 @@ func (h JSONSpecHandler) JsonStringToTaskSpec(content string) TaskSpec {
 }
 
 // takes in the JSON file and parse into TaskSpec
-func (h JSONSpecHandler) JsonFileToTaskSpec(path string) TaskSpec {
+func JsonFileToTaskSpec(path string) TaskSpec {
 	content, err := os.ReadFile(path)
 	if err != nil {
 		log.Fatalf("%s is not a valid JSON path", path)
 	}
 
-	taskSpec := h.JsonStringToTaskSpec(string(content))
+	taskSpec := JsonStringToTaskSpec(string(content))
 	return taskSpec
 }
 
